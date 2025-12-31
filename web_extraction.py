@@ -34,7 +34,35 @@ def get_image_link_from_html(html, image_id):
     if f"{image_link_starter}1200" in html:
         return f"{image_link_starter}1200"
 
+# Extract species name, scientific name, photographer name from Macaulay Library html
+def get_data_from_html(html):
+    # Get species name
+    temp = html.split("<span class=\"Heading-main\">")
+    first_elem = temp[1]
+    temp_split = first_elem.split("<")
+    species_name = temp_split[0]
+
+    # Get scientific name
+    temp = html.split("sciName:\"")
+    first_elem = temp[1]
+    temp_split = first_elem.split("\"")
+    scientific_name = temp_split[0]
+
+    # Get photographer name
+    temp = html.split("userDisplayName:\"")
+    first_elem = temp[1]
+    temp_split = first_elem.split("\"")
+    photographer_name = temp_split[0]
+
+    return [species_name, scientific_name, photographer_name]
+
+
+# <span class="Heading-main">
+# sciName
+# © userDisplayName
+
 
 [html_test, image_id_test] = extract_html_from_link("https://macaulaylibrary.org/asset/204972611")
 image_link = get_image_link_from_html(html_test, image_id_test)
 print(image_link)
+print(get_data_from_html(html_test))
