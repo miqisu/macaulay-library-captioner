@@ -46,9 +46,9 @@ def get_data_from_html(html):
     scientific_name = temp_split[0]
 
     # Get photographer name
-    temp = html.split("userDisplayName:\"")
+    temp = html.split("© ")
     first_elem = temp[1]
-    temp_split = first_elem.split("\"")
+    temp_split = first_elem.split(";")
     photographer_name = temp_split[0]
     # Some photographer names contain strings other than their name after a bar symbol
     if "|" in photographer_name:
