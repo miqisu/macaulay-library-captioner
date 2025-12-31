@@ -55,14 +55,3 @@ def get_data_from_html(html):
     photographer_name = temp_split[0]
 
     return [species_name, scientific_name, photographer_name]
-
-
-# <span class="Heading-main">
-# sciName
-# © userDisplayName
-
-
-[html_test, image_id_test] = extract_html_from_link("https://macaulaylibrary.org/asset/204972611")
-image_link = get_image_link_from_html(html_test, image_id_test)
-print(image_link)
-print(get_data_from_html(html_test))
