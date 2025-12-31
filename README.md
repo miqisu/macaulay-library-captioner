@@ -44,3 +44,4 @@ link3
 -   All images are saved in PNG format, named by their "asset ID" (the number at the end of a Macaulay Library asset link).
 -   Because of Pillow's image handling, the original image's colours may be slightly altered, as seen in the example.
 -   The fonts used for the captioning are Arial, Arial Italics, and Arial Bold, stored in the directory `fonts`. 
+-   This tool does NOT use eBird API, and is liable to break if Cornell updates their web UI.
