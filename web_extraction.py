@@ -44,13 +44,6 @@ def get_data_from_html(html):
     first_elem = temp[1]
     temp_split = first_elem.split("<")
     scientific_name = temp_split[0]
-    
-    # temp = html.split("sciName:\"")
-    # first_elem = temp[1]
-    # temp_split = first_elem.split("\"")
-    # scientific_name = temp_split[0]
-
-    # <span class="Heading-sub Heading-sub--inline Heading-sub--sci">Rostrhamus sociabilis</span>
 
     # Get photographer name
     temp = html.split("© ")
