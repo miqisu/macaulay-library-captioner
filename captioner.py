@@ -20,7 +20,7 @@ def caption_image(link):
 
     # Process image and add caption
     original_img = image_editor.extract_image_from_link(image_link)
-    captioned_img = image_editor.add_caption(original_img, species_name, scientific_name, photographer_name)
+    captioned_img = image_editor.add_caption(original_img, species_name, scientific_name, photographer_name, 0, 0, 0)
 
     return captioned_img
 

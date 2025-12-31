@@ -9,23 +9,24 @@ def extract_image_from_link(image_link):
     return img
 
 # Add caption with species name, scientific name, photographer, etc to PIL Image
-def add_caption(img, species_name, scientific_name, photographer_name):
+def add_caption(img, species_name, scientific_name, photographer_name, caption_height, text_buffer, font_size):
     original_width, original_height = img.size
 
     # Calculate caption height, text buffer and font size depending on size of image
-    if original_width >= 1800:
-        caption_height = 100
-        text_buffer = 20
-        font_size = 42
-    elif original_width >= 1200:
-        caption_height = 75
-        text_buffer = 15
-        font_size = 32
-    else:
-        caption_height = 50
-        text_buffer = 10
-        font_size = 21
-    
+    if caption_height == 0:
+        if original_width >= 1800:
+            caption_height = 100
+            text_buffer = 20
+            font_size = 42
+        elif original_width >= 1200:
+            caption_height = 75
+            text_buffer = 15
+            font_size = 32
+        else:
+            caption_height = 50
+            text_buffer = 10
+            font_size = 21
+
     new_width = original_width
     new_height = original_height + caption_height
 
@@ -72,5 +73,17 @@ def add_caption(img, species_name, scientific_name, photographer_name):
     draw_ebird = ImageDraw.Draw(new_img)
     font = ImageFont.truetype("fonts/arial.ttf", font_size)
     draw_ebird.text((9*text_buffer + species_name_width + scientific_name_width + photographer_name_width + library_width, new_height - caption_height*0.75), "eBird", (157, 157, 157), font=font)
+
+    # Measure eBird text width
+    ebird_width = draw_ebird.textlength("eBird", font=font)
+
+    # Check if total text width is too long
+    total_text_width = 9*text_buffer + species_name_width + scientific_name_width + photographer_name_width + library_width + ebird_width
+
+    if total_text_width >= original_width:
+        caption_height = round(caption_height * 0.8)
+        text_buffer = round(text_buffer * 0.8)
+        font_size = round(font_size * 0.8)
+        return add_caption(img, species_name, scientific_name, photographer_name, caption_height, text_buffer, font_size)
 
     return new_img
