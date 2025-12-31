@@ -11,9 +11,6 @@ def extract_html_from_link(link):
     # testing purpose only
     split = link.split("/")
     image_id = split[-1]
-    filename = f"{image_id}.txt"
-    with open(filename, "a") as f:
-        f.write(html)
     
     return [html, image_id]
 
